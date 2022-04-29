@@ -17,9 +17,9 @@
                 <ul class="right">
                     {% comment %} {% if user.is_authenticated %}
 <li><a href="{% url 'logout' %}">Log Out</a></li> 
-                    {% else %}
+                    {% else %}{% endcomment %}
 <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li> 
+                 {% comment %}        <li><a href="{% url 'login' %}">Log In</a></li> 
                     {% endif %} {% endcomment %}
                 </ul>
             </div>
