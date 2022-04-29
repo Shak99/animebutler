@@ -1,7 +1,12 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>hello this is the details page</h1>
+
+<p>Title: {{ anime.title }}</p>
+<p>Producer: {{ anime.producer }}</p>
+<p>Creator: {{ anime.creator }}</p>
+<p>Genre: {{ anime.get_genre_display }}</p>
+<p>Description: {{ anime.description }}</p>
+<p>Language Choices: {{ anime.get_language_display }}</p>
 
 {% endblock %}

@@ -50,7 +50,7 @@ class Watchlist(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('watchlist_detail', kwargs={'pk': user})
+        return reverse('watchlist_detail', kwargs={'pk': self.id})
     
 class Interest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView
+from django.views.generic import ListView, DetailView
 from .models import *
 # Create your views here.
 def index(request):
@@ -26,6 +26,11 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+class Interests(ListView):
+    model = Interest
+
 
 class AnimeCreate(CreateView):
     model = Anime
@@ -64,7 +69,7 @@ def animes_detail(request, anime_id):
 #   Anime.objects.get(id=anime_id).interests.add(interests_id)
 #   return redirect('detail', anime_id=anime_id)
 
-class WatchlistDetail(DetailView):
+class WatchlistDetail(ListView):
   model = Watchlist
 
 
