@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>AnimeButler</title>
+</head>
+<body>
+    <header class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper  blue lighten-4">
+                <ul>
+                    <li><a href="/" class="left brand-logo black-text">&nbsp;&nbsp;AnimeButler</a></li>
+                </ul>
+                <ul class="right">
+                    {% comment %} {% if user.is_authenticated %}
+<li><a href="{% url 'logout' %}">Log Out</a></li> 
+                    {% else %}
+<li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li> 
+                    {% endif %} {% endcomment %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
