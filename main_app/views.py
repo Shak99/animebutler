@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
+from .models import *
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -24,3 +26,57 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+class AnimeCreate(CreateView):
+    model = Anime
+    fields = '__all__'
+    success_url = '/animes/'
+
+class InterestCreate(CreateView):
+  model = Interest
+  fields = '__all__'
+  success_url = '/interests/'
+
+class InterestDelete(DeleteView):
+  model = Interest
+  success_url = '/interests/'
+
+def animes_index(request):
+    animes = Anime.objects.all()
+    return render(request, 'animes/anime.html', { 'animes': animes })
+
+def animes_detail(request, anime_id):
+    anime = Anime.objects.get(id=anime_id)
+    # watchlist_form = watchlistForm()
+    return render(request, 'animes/detail.html', {
+        'anime': anime, 
+    })
+
+# def add_watchlist (request, anime_id):
+#   form = watchlistForm(request.POST)
+#   if form.is_valid():
+#     new_watchlist = form.save(commit=False)
+#     new_watchlist.anime_id = anime_id
+#     new_watchlist.save()
+#   return redirect('detail', anime_id=anime_id)
+
+# def assoc_interest(request, anime_id, interests_id):
+#   Anime.objects.get(id=anime_id).interests.add(interests_id)
+#   return redirect('detail', anime_id=anime_id)
+
+class WatchlistDetail(DetailView):
+  model = Watchlist
+
+
+# class WatchlistCreate(CreateView):
+#   model = Watchlist
+#   fields = '__all__'
+
+class WatchlistUpdate(UpdateView):
+  model = Watchlist
+  fields = ['anime', 'interest']
+
+class WatchlistDelete(DeleteView):
+  model = Watchlist
+  success_url = '/watchlist/'
+

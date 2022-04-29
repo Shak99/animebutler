@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
     
@@ -47,6 +48,9 @@ class Anime(models.Model):
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('watchlist_detail', kwargs={'pk': user})
     
 class Interest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
