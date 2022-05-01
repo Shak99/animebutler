@@ -28,9 +28,15 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-class Interests(ListView):
-    model = Interest
-
+# class Interests(ListView):
+#     model = Interest
+def interest_index(request):
+# limit interest to show over if it matches user id
+    interests = Interest.objects.filter(user=request.user)
+    context = {
+        'interests': interests
+    }
+    return render(request, 'interests/index.html', context)
 
 class AnimeCreate(CreateView):
     model = Anime
@@ -39,7 +45,13 @@ class AnimeCreate(CreateView):
 
 class InterestCreate(CreateView):
     model = Interest
-    fields = '__all__'
+    fields = ['genre']
+
+# tie in the user_id request.user
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
     success_url = '/interests/'
 
 class InterestDelete(DeleteView):

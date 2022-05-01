@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>hello this is your interests lists page</h1>
+<h3>{{ user.username }}</h3>
+
+{% for interest in interests %}
+    {{ interest.get_genre_display }}
+{% endfor %}
+
+{% endblock %}
