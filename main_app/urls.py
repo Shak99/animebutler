@@ -13,6 +13,8 @@ urlpatterns = [
     
     # Watchlist views
     path('watchlist/', views.WatchlistDetail.as_view(), name='watchlist_list'),
+    path('watchlist/add_anime/<int:anime_id>', views.add_to_watchlist, name='add_anime'),
+    # path('watchlist/<int:anime_id>/addanime/', views.addToWatchlist.as_view(), name='add_anime'),
     # path('animes/<int:user_id>/update_watchlist/', views.WatchlistUpdate.as_view(), name='update_watchlist'),
     # path('animes/<int:user_id>/delete_watchlist/', views.WatchlistDelete.as_view(), name='delete_watchlist'),
 

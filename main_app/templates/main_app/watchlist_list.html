@@ -4,4 +4,11 @@
 
 <h1>hello this is the watchlist detail page</h1>
 
+{% for object in object_list %}
+<div class="card">
+    Title: {{ object.anime.title }}
+    Description: {{ object.anime.description }}
+</div>
+{% endfor %}
+
 {% endblock %}
