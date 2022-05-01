@@ -6,7 +6,11 @@
 <h3>{{ user.username }}</h3>
 
 {% for interest in interests %}
-    {{ interest.get_genre_display }}
+    <p>{{ interest.get_genre_display }}</p>
+    <form method="POST" action="{% url 'delete_interest' interest.id %}">
+        {% csrf_token %}
+        <input type="submit" value="delete">
+    </form>
 {% endfor %}
 
 {% endblock %}

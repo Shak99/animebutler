@@ -19,5 +19,5 @@ urlpatterns = [
     # Interest views
     path('interests/', views.interest_index, name='interest_index'),
     path('interests/create/', views.InterestCreate.as_view(), name='interest_form'),
-    path('animes/<int:user_id>/delete_interest/', views.InterestDelete.as_view(), name='delete_interest'),
+    path('animes/<int:pk>/delete_interest/', views.InterestDelete.as_view(), name='delete_interest'),
 ]

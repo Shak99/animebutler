@@ -27,9 +27,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-
-# class Interests(ListView):
-#     model = Interest
 def interest_index(request):
 # limit interest to show over if it matches user id
     interests = Interest.objects.filter(user=request.user)
