@@ -38,13 +38,13 @@ class AnimeCreate(CreateView):
     success_url = '/animes/'
 
 class InterestCreate(CreateView):
-  model = Interest
-  fields = '__all__'
-  success_url = '/interests/'
+    model = Interest
+    fields = '__all__'
+    success_url = '/interests/'
 
 class InterestDelete(DeleteView):
-  model = Interest
-  success_url = '/interests/'
+    model = Interest
+    success_url = '/interests/'
 
 def animes_index(request):
     animes = Anime.objects.all()
@@ -70,7 +70,7 @@ def animes_detail(request, anime_id):
 #   return redirect('detail', anime_id=anime_id)
 
 class WatchlistDetail(ListView):
-  model = Watchlist
+    model = Watchlist
 
 
 # class WatchlistCreate(CreateView):
@@ -78,10 +78,9 @@ class WatchlistDetail(ListView):
 #   fields = '__all__'
 
 class WatchlistUpdate(UpdateView):
-  model = Watchlist
-  fields = ['anime', 'interest']
+    model = Watchlist
+    fields = ['anime', 'interest']
 
 class WatchlistDelete(DeleteView):
-  model = Watchlist
-  success_url = '/watchlist/'
-
+    model = Watchlist
+    success_url = '/watchlist/'

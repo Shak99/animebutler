@@ -17,15 +17,13 @@
                 <ul class="right">
                 
                     {% if user.is_authenticated %}
-<li><a href="{% url 'logout' %}">Log Out</a></li> 
-<li><a href="{% url 'anime' %}">All Animes</a></li>
-<li><a href="{% url 'watchlist_detail'%}">Watchlist</a></li>
-<li><a href="{% url 'interests' %}">Personal Interests</a></li>
-                    {% else %}
-                    
-<li><a href="{% url 'signup' %}">Sign Up</a></li>
-                
-                   <li><a href="{% url 'login' %}">Log In</a></li> 
+                        <li><a href="{% url 'logout' %}">Log Out</a></li> 
+                        <li><a href="{% url 'anime' %}">All Animes</a></li>
+                        <li><a href="{% url 'watchlist_detail'%}">Watchlist</a></li>
+                        <li><a href="{% url 'interests' %}">Personal Interests</a></li>
+                    {% else %}        
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li> 
                     {% endif %} 
                     
                 </ul>
