@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>hello this is your interests lists page</h1>
+<h3>{{ user.username }}</h3>
+
+{% for interest in interests %}
+    <p>{{ interest.get_genre_display }}</p>
+    <form method="POST" action="{% url 'delete_interest' interest.id %}">
+        {% csrf_token %}
+        <input type="submit" value="delete">
+    </form>
+{% endfor %}
+
+{% endblock %}

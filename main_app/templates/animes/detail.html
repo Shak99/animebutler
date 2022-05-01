@@ -9,4 +9,12 @@
 <p>Description: {{ anime.description }}</p>
 <p>Language Choices: {{ anime.get_language_display }}</p>
 
+{% if user.is_authenticated %}
+    {% comment %} add some button to add to watchlist {% endcomment %}
+    <form method="POST" action="{% url 'add_anime' anime.id %}">
+        <input type="submit" value="add to list" class="btn">
+    </form>
+    
+{% endif %}
+
 {% endblock %}

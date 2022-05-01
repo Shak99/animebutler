@@ -2,6 +2,24 @@
 
 {% block content %}
 
-<h1>hello this is your interests</h1>
+<h1>hello this is your add interests form</h1>
 
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="add interest" class="btn">
+</form>
+
+
+<script>
+    {% comment %} const dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });     {% endcomment %}
+    const selectEl = document.getElementById('id_genre');
+    M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
