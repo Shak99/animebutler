@@ -4,6 +4,13 @@
 
 <h1>hello this is the anime index page</h1>
 
+{%for anime in animes%}
+    <p>{{anime.get_genre_display}}</p>
+
+    <a href="{% url 'genre' anime.get_genre_display %}"> <button>Genre button </button> </a>
+{% endfor %}
+
+
 {% for anime in animes  %}
 <a href="{% url 'detail' anime.id %}">Show More</a>
 <p>{{ anime.title }}</p>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>hello this is the anime genre page</h1>
+
+{% for anime in genres  %}
+<a href="{% url 'detail' anime.id %}">Show More</a>
+<p>{{ anime.title }}</p>
+
+
+    
+{% endfor %}
+    
+
+
+
+{% endblock %}

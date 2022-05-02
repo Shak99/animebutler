@@ -51,6 +51,17 @@ def animes_detail(request, anime_id):
     return render(request, 'animes/detail.html', {
         'anime': anime, 
     })
+    
+def genre_view(request, genre_id):
+    for genre in GENRES:
+        if genre_id == genre[1]:
+            anime_genre = Anime.objects.filter (genre = genre[0])
+    context = {
+        'genres': anime_genre,
+        'GENRES': GENRES
+    }
+    return render(request, 'animes/genre.html', context)
+    
 
 def add_to_watchlist(request, anime_id):
     new_anime = Anime.objects.get(id=anime_id)
