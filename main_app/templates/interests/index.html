@@ -9,7 +9,7 @@
     <p>{{ interest.get_genre_display }}</p>
     <form method="POST" action="{% url 'delete_interest' interest.id %}">
         {% csrf_token %}
-        <input type="submit" value="delete">
+        <input class="btn red darken-4" type="submit" value="delete">
     </form>
 {% endfor %}
 

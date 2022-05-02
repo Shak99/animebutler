@@ -1,31 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
+<link rel=“stylesheet” type=“text/css” href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>AnimeButler</title>
 </head>
-<body>
+<body class="purple lighten-5">
     <header class="navbar-fixed">
         <nav>
-            <div class="nav-wrapper  blue lighten-4">
+            <div class="nav-wrapper  purple darken-4">
                 <ul>
-                    <li><a href="/" class="left brand-logo black-text">&nbsp;&nbsp;AnimeButler</a></li>
+                    <li><a href="/" font-family="Tapestry" class="left brand-logo yellow-text accent-2">&nbsp;&nbsp;AnimeButler</a></li>
                 </ul>
                 <ul class="right">
                 
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Log Out</a></li> 
-                        <li><a href="{% url 'anime' %}">All Animes</a></li>
-                        <li><a href="{% url 'watchlist_list'%}">Watchlist</a></li>
-                        <li><a href="{% url 'interest_index' %}">Personal Interests</a></li>
-                        <li><a href="{% url 'interest_form' %}">Add Interest</a></li>
+                        <li><a class=" yellow-text accent-2" href="{% url 'logout' %}">Log Out</a></li> 
+                        <li><a class=" yellow-text accent-2" href="{% url 'anime' %}">Animes</a></li>
+                        <li><a class=" yellow-text accent-2" href="{% url 'watchlist_list'%}">Watchlist</a></li>
+                        <li><a class=" yellow-text accent-2" href="{% url 'interest_index' %}">Personal Interests</a></li>
+                        <li><a class=" yellow-text accent-2" href="{% url 'interest_form' %}">Add Interest</a></li>
                     {% else %}        
-                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li> 
+                        <li><a class=" yellow-text accent-2" href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a class=" yellow-text accent-2" href="{% url 'login' %}">Log In</a></li> 
                     {% endif %} 
                     
                 </ul>
