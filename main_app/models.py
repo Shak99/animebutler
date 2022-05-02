@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
     
-GENRES = (
+GENRES = [
     ('a', 'Action Adventure'),
     ('b', 'Comedy'),
     ('c', 'Drama'),
@@ -16,7 +16,7 @@ GENRES = (
     ('i', 'Shoujo'),
     ('j', 'Shounen'),
     ('k', 'Slice of Life'),
-)
+]
 
 LANG_OPTIONS = (
     ('a', 'Japanese Original'),
