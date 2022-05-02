@@ -60,6 +60,11 @@ def add_to_watchlist(request, anime_id):
                 )
     return redirect('/watchlist/')
 
+def delete_from_watchlist(request, anime_id):
+    addedanime = Watchlist.objects.get(anime=anime_id)
+    addedanime.delete()
+    return redirect('/watchlist/')
+
 # class addToWatchlist(CreateView):
 #     model = Watchlist
 #     fields = ['anime']

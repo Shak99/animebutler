@@ -8,6 +8,10 @@
 <div class="card">
     Title: {{ object.anime.title }}
     Description: {{ object.anime.description }}
+    <form method="POST" action="{% url 'delete_anime' object.anime.id %}">
+        {% csrf_token %}
+        <input type="submit" value="delete from list" class="btn">
+    </form>
 </div>
 {% endfor %}
 
