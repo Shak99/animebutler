@@ -37,10 +37,10 @@ body {
                         <a href="{% url 'watchlist_list'%}">Watchlist</a>
                         <a href="{% url 'interest_index' %}">Personal Interests</a>
                         <a href="{% url 'interest_form' %}">Add Interest</a>
+                        <a href="{% url 'logout' %}">Log Out</a>
                     {% else %}        
                         <a href="{% url 'signup' %}">Sign Up</a>
-                        <a href="{% url 'logout' %}">Log Out</a>
-                        {% comment %} <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Log In</a> {% endcomment %}
+                        <a href="{% url 'login' %}">Log In</a>
                     {% endif %} 
                     
                 </div>
