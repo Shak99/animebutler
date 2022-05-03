@@ -1,4 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Tapestry&display=swap');
+
+:root {
+    --deep-purple: #4A148C;
+    --red-darken: #b71c1c;
+    --pink-darken: #FFBF46;
+    --pink-accent: #B3DEC1;
+    --cyan-lighten: #26c6da ;
+    --teal-accent: #a7ffeb;
+    --indigo-accent: #3d5afe;
+    --purple-accent: #aa00ff;
+    --amber-accent: #ffd740;
+    --yellow-accent: #ffff8d ;
+    --lime-accent: #76ff03;
+  }
+
 body {
     font-family: 'Tapestry', cursive;
     /* font-family: "comic sans"; */
@@ -21,4 +36,9 @@ body {
     margin-left: auto;
     margin-right: auto;
     background-size: 180px 200px;
+}
+
+li {
+    padding: 30px;
+    
 }

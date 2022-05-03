@@ -30,20 +30,20 @@ body {
                 <ul>
                     <li><a href="/" font-family="Tapestry" class="left brand-logo yellow-text accent-2">&nbsp;&nbsp;AnimeButler</a></li>
                 </ul>
-                <ul class="right">
+                <div class="right">
                 
                     {% if user.is_authenticated %}
-                        <li><a class=" yellow-text accent-2" href="{% url 'logout' %}">Log Out</a></li> 
-                        <li><a class=" yellow-text accent-2" href="{% url 'anime' %}">Animes</a></li>
-                        <li><a class=" yellow-text accent-2" href="{% url 'watchlist_list'%}">Watchlist</a></li>
-                        <li><a class=" yellow-text accent-2" href="{% url 'interest_index' %}">Personal Interests</a></li>
-                        <li><a class=" yellow-text accent-2" href="{% url 'interest_form' %}">Add Interest</a></li>
+                        <a href="{% url 'anime' %}">Animes</a>
+                        <a href="{% url 'watchlist_list'%}">Watchlist</a>
+                        <a href="{% url 'interest_index' %}">Personal Interests</a>
+                        <a href="{% url 'interest_form' %}">Add Interest</a>
                     {% else %}        
-                        <li><a class=" yellow-text accent-2" href="{% url 'signup' %}">Sign Up</a></li>
-                        <li><a class=" yellow-text accent-2" href="{% url 'login' %}">Log In</a></li> 
+                        <a href="{% url 'signup' %}">Sign Up</a>
+                        <a href="{% url 'logout' %}">Log Out</a>
+                        {% comment %} <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Log In</a> {% endcomment %}
                     {% endif %} 
                     
-                </ul>
+                </div>
             </div>
         </nav>
     </header>
