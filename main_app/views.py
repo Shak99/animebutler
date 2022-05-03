@@ -6,6 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import *
+
+import requests
+
 # Create your views here.
 def index(request):
     # should also show all animes in database
@@ -42,7 +45,20 @@ def interest_index(request):
 @login_required
 def animes_index(request):
     animes = Anime.objects.all()
-    return render(request, 'animes/anime.html', { 'animes': animes })
+
+    return render(request, 'animes/anime.html', { 
+        'animes': animes,
+        })
+
+def search_for_anime(request):
+    print('is search for anime function running?')
+    query = request.GET.get('q')
+    # print(request.GET.get('q'))
+    response = requests.get(f"https://api.jikan.moe/v4/anime?q={query}")
+    results = response.json()
+    results = results['data']
+
+    return render(request, 'animes/anime.html', {'results' : results})
 
 def animes_detail(request, anime_id):
     anime = Anime.objects.get(id=anime_id)

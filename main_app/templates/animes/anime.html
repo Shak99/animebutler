@@ -16,7 +16,7 @@
 <div class="card">
     
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="images/office.jpg">
+      <img class="activator" src="">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{ anime.title }}<i class="material-icons right">more_vert</i></span>
@@ -33,10 +33,22 @@
 
     
 {% endfor %}
-    
 
+<form action="{% url 'search' %}" method="GET">
+  <input type="text" name="q">
+  <input type="submit" value="search">
+</form>
 
+<div class="row">
+{% for anime in results %}
+    <img src="{{ anime.images.jpg.image_url }}">
+    {{ anime.mal_id }}
+      {{ anime.title }}
+    <p>{{ anime.description }}</p>
 
-{% endblock %}\\\  
+</div>
+{% endfor %}
+
+{% endblock %}
 
 

@@ -4,4 +4,19 @@
 
 <h1>hello this is the landing page</h1>
 
+<form action="{% url 'ind_search' %}" method="GET">
+    <input type="text" name="q">
+    <input type="submit" value="search">
+</form>
+
+<div class="row">
+    
+    {% for anime in results %}
+        <img src="{{ anime.images.jpg.image_url }}">
+        {{ anime.mal_id }}
+            {{ anime.title }}
+        <p>{{ anime.description }}</p>
+</div>
+{% endfor %}
+
 {% endblock %}
