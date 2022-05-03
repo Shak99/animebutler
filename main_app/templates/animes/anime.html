@@ -13,24 +13,21 @@
 {% for anime in animes  %}
 <div class="row">
     <div class="col s3">
-<div class="card">
-    
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">{{ anime.title }}<i class="material-icons right">more_vert</i></span>
-      <p><a href="{% url 'detail' anime.id %}">Show More</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">{{ anime.title }}<i class="material-icons right">close</i></span>
-      <p>{{ anime.description }}</p>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="">
+        </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{ anime.title }}</span>
+        <p><a href="{% url 'detail' anime.id %}">See More</a></p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{ anime.title }}<i class="material-icons right">close</i></span>
+        <p>{{ anime.description }}</p>
+      </div>
     </div>
   </div>
 </div>
-</div>
-
-
     
 {% endfor %}
 
@@ -39,13 +36,24 @@
   <input type="submit" value="search">
 </form>
 
-<div class="row">
-{% for anime in results %}
-    <img src="{{ anime.images.jpg.image_url }}">
-    {{ anime.mal_id }}
-      {{ anime.title }}
-    <p>{{ anime.description }}</p>
 
+
+<div class="grid-container" style="position: center">
+  {% for anime in results %}
+  <div class="container" id="divImg" style="background-size: contain; background-repeat: no-repeat;">
+    <div class="card small">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img src="{{ anime.images.jpg.image_url }}">
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{ anime.title }}
+        <p><a href="{% url 'detail' anime.mal_id %}">See More</a></p>
+        </div>
+      <div class="card-reveal">
+        <p>{{ anime.synopsis }}</p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endfor %}
 

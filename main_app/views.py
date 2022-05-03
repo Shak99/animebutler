@@ -61,22 +61,27 @@ def search_for_anime(request):
     return render(request, 'animes/anime.html', {'results' : results})
 
 def animes_detail(request, anime_id):
-    anime = Anime.objects.get(id=anime_id)
+    response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
+    anime = response.json()
+    anime = anime['data']
+    # anime = Anime.objects.get(id=anime_id)
     # at some point add functionality to add anime to watchlist
     # watchlist_form = watchlistForm()
     return render(request, 'animes/detail.html', {
         'anime': anime, 
     })
     
-def genre_view(request, genre_id):
-    for genre in GENRES:
-        if genre_id == genre[1]:
-            anime_genre = Anime.objects.filter (genre = genre[0])
-    context = {
-        'genres': anime_genre,
-        'GENRES': GENRES
-    }
-    return render(request, 'animes/genre.html', context)
+# def genre_view(request, genre_id):
+#     id_for_genre = None
+#     for genre in GENRES:
+#         if genre_id == genre[1]:
+#             id_for_genre = genre[0]
+#     anime_genre = Anime.objects.filter (genre = id_for_genre)
+#     context = {
+#         'genres': anime_genre,
+#         'GENRES': GENRES
+#     }
+#     return render(request, 'animes/genre.html', context)
     
 
 def add_to_watchlist(request, anime_id):
