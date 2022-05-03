@@ -85,7 +85,18 @@ def animes_detail(request, anime_id):
     
 
 def add_to_watchlist(request, anime_id):
-    new_anime = Anime.objects.get(id=anime_id)
+    # api request consumption for one anime
+    response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
+    anime = response.json()
+    anime = anime['data']
+    # saves api info to a new instance of Anime model
+    new_anime = Anime.objects.create(
+        title=anime['title'],
+        description = anime['synopsis'][:498],
+        episodes = anime['episodes'],
+        # accept mal_id as a separate id for anime to reference api
+    )
+    # saves anime and user to watchlist
     Watchlist.objects.create (
                     user=request.user,
                     anime=new_anime

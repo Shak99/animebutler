@@ -4,10 +4,10 @@
 
 <h1>hello this is the anime index page</h1>
 
-{%for anime in animes%}
+{% comment %} {%for anime in animes%}
 
-    <a class="waves-effect waves-light btn-large cyan lighten-1 " href="{% url 'genre' anime.get_genre_display %}"> {{anime.get_genre_display}}</a>
-{% endfor %}
+    {% comment %} <a class="waves-effect waves-light btn-large cyan lighten-1 " href="{% url 'genre' anime.get_genre_display %}"> {{anime.get_genre_display}}</a> 
+{% endfor %} {% endcomment %}
 <br>
 
 {% for anime in animes  %}
@@ -38,9 +38,9 @@
 
 
 
-<div class="grid-container" style="position: center">
+<div style="position: center">
   {% for anime in results %}
-  <div class="container" id="divImg" style="background-size: contain; background-repeat: no-repeat;">
+  <div id="divImg" style="background-size: contain; background-repeat: no-repeat;">
     <div class="card small">
       <div class="card-image waves-effect waves-block waves-light">
         <img src="{{ anime.images.jpg.image_url }}">

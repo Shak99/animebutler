@@ -19,7 +19,11 @@
 {% comment %} <p>Language Choices: {{ anime.get_language_display }}</p> {% endcomment %}
 
 {% if user.is_authenticated %}
-    {% comment %} add some button to add to watchlist {% endcomment %}
+    <!-- watchlist has a foreign key to anime.mal_id
+        anime model is where the foreign key comes from
+        how to add api anime to anime model? with api anime's id
+        
+    -->
     <form method="POST" action="{% url 'add_anime' anime.mal_id %}"> 
         {% csrf_token %}
         <input type="submit" value="add to list" class="btn">
