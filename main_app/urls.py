@@ -3,13 +3,15 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('search/', views.search_for_anime, name='ind_search'),
     path('accounts/signup/', views.signup, name='signup'),
     
     # Anime views
     path('animes/', views.animes_index, name='anime'),
     path('animes/<int:anime_id>/', views.animes_detail, name='detail'),
     path('animes/create/', views.AnimeCreate.as_view(), name='animes_create'),
-    path('animes/<str:genre_id>/', views.genre_view, name="genre"),
+    # path('animes/<str:genre_id>/', views.genre_view, name="genre"),
+    path('animes/search/', views.search_for_anime, name='search'),
     # path('animes/<int:pk>/delete/', views.AnimeDelete.as_view(), name='animes_delete'),
     
     # Watchlist views

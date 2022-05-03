@@ -4,4 +4,28 @@
 
 <h1>hello this is the landing page</h1>
 
+<form action="{% url 'ind_search' %}" method="GET">
+    <input type="text" name="q">
+    <input type="submit" value="search">
+</form>
+
+
+<div class="row">
+    {% for anime in results %}
+    <div class="col s6 m4 l2">
+        <div class="card small">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img src="{{ anime.images.jpg.image_url }}">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{ anime.title }}
+            </div>
+            <div class="card-reveal">
+                <p>{{ anime.synopsis }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}

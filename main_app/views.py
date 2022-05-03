@@ -6,6 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import *
+
+import requests
+
 # Create your views here.
 def index(request):
     # should also show all animes in database
@@ -42,29 +45,58 @@ def interest_index(request):
 @login_required
 def animes_index(request):
     animes = Anime.objects.all()
-    return render(request, 'animes/anime.html', { 'animes': animes })
+
+    return render(request, 'animes/anime.html', { 
+        'animes': animes,
+        })
+
+def search_for_anime(request):
+    print('is search for anime function running?')
+    query = request.GET.get('q')
+    # print(request.GET.get('q'))
+    response = requests.get(f"https://api.jikan.moe/v4/anime?q={query}")
+    results = response.json()
+    results = results['data']
+
+    return render(request, 'animes/anime.html', {'results' : results})
 
 def animes_detail(request, anime_id):
-    anime = Anime.objects.get(id=anime_id)
+    response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
+    anime = response.json()
+    anime = anime['data']
+    # anime = Anime.objects.get(id=anime_id)
     # at some point add functionality to add anime to watchlist
     # watchlist_form = watchlistForm()
     return render(request, 'animes/detail.html', {
         'anime': anime, 
     })
     
-def genre_view(request, genre_id):
-    for genre in GENRES:
-        if genre_id == genre[1]:
-            anime_genre = Anime.objects.filter (genre = genre[0])
-    context = {
-        'genres': anime_genre,
-        'GENRES': GENRES
-    }
-    return render(request, 'animes/genre.html', context)
+# def genre_view(request, genre_id):
+#     id_for_genre = None
+#     for genre in GENRES:
+#         if genre_id == genre[1]:
+#             id_for_genre = genre[0]
+#     anime_genre = Anime.objects.filter (genre = id_for_genre)
+#     context = {
+#         'genres': anime_genre,
+#         'GENRES': GENRES
+#     }
+#     return render(request, 'animes/genre.html', context)
     
 
 def add_to_watchlist(request, anime_id):
-    new_anime = Anime.objects.get(id=anime_id)
+    # api request consumption for one anime
+    response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
+    anime = response.json()
+    anime = anime['data']
+    # saves api info to a new instance of Anime model
+    new_anime = Anime.objects.create(
+        title=anime['title'],
+        description = anime['synopsis'][:498],
+        episodes = anime['episodes'],
+        # accept mal_id as a separate id for anime to reference api
+    )
+    # saves anime and user to watchlist
     Watchlist.objects.create (
                     user=request.user,
                     anime=new_anime
