@@ -1,34 +1,41 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
-<h1>hello this is the details page</h1>
+{% block content %}
 
-<img src="{{ anime.images.jpg.image_url}}" alt="image for {{anime.title}}">
-<p>Title: {{ anime.title }}</p>
-<div>Producer: {% for producer in anime.producers  %}
-    {{producer.name}} <br>
-    {% endfor %}
+<h1>More about {{anime.title}}</h1>
+<section class="anime-detail">
+    <div>
+        <img src="{{ anime.images.jpg.image_url}}" alt="image for {{anime.title}}">
+    </div>
+    <div>
+        <p><span>Title:</span> {{ anime.title }}</p>
+        <div>
+            <span>Producer(s):</span><br>
+            {% for producer in anime.producers  %}
+                {{producer.name}} <br> 
+            {% endfor %}
+            <br>
+        </div>
+        <div>
+            <span>Genre(s):</span><br> 
+            {% for genre in anime.genres %}
+                {{genre.name}} <br> 
+            {% endfor %}
+        </div>
+        <p><span>Year:</span> {{anime.year}}</p>
+        <p><span>Episodes:</span> {{anime.episodes}}</p>
+        <p><span>Status:</span> {{anime.status}}</p>
+    </div>
+</section>
+<div class="description">
+    <p><span>Description:</span> {{ anime.synopsis }}</p>
 </div>
-<div>Genre: {% for genre in anime.genres %}
-    {{genre.name}}<br>
-    {% endfor %}
-</div>
-<p>Year: {{anime.year}}</p>
-<p>Episodes: {{anime.episodes}}</p>
-<p>Status: {{anime.status}}</p>
-<p>Description: {{ anime.synopsis }}</p>
-{% comment %} <p>Language Choices: {{ anime.get_language_display }}</p> {% endcomment %}
 
 {% if user.is_authenticated %}
-    <!-- watchlist has a foreign key to anime.mal_id
-        anime model is where the foreign key comes from
-        how to add api anime to anime model? with api anime's id
-        
-    -->
     <form method="POST" action="{% url 'add_anime' anime.mal_id %}"> 
         {% csrf_token %}
-        <input type="submit" value="add to list" class="btn">
-    </form>
-    
+        <input type="submit" value="add to list" class="button">
+    </form> 
 {% endif %}
 
 {% endblock %}

@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('search/', views.search_for_anime, name='ind_search'),
+    path('genre-search/<int:genre_id>/', views.search_by_genre, name='animes-genre'),
     path('accounts/signup/', views.signup, name='signup'),
     
     # Anime views

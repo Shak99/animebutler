@@ -2,60 +2,48 @@
 
 {% block content %}
 
-<h1>hello this is the anime index page</h1>
+<h1>Welcome back, {{ user.username}}</h1>
 
-{% comment %} {%for anime in animes%}
-
-    {% comment %} <a class="waves-effect waves-light btn-large cyan lighten-1 " href="{% url 'genre' anime.get_genre_display %}"> {{anime.get_genre_display}}</a> 
-{% endfor %} {% endcomment %}
-<br>
-
-{% for anime in animes  %}
-<div class="row">
-    <div class="col s3">
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="">
-        </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{ anime.title }}</span>
-        <p><a href="{% url 'detail' anime.id %}">See More</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{ anime.title }}<i class="material-icons right">close</i></span>
-        <p>{{ anime.description }}</p>
-      </div>
-    </div>
+<h3>Search for anime or click on an interest</h3>
+<div class="search">
+  <form action="{% url 'search' %}" method="GET">
+    <input type="text" name="q">
+    <input type="submit" value="search" class="button">
+  </form>
+  <div class="interests">
+    {% for interest in interests %}
+    <form action="{% url 'search' %}" method="GET">
+        <input type="hidden" name="q" value="{{ interest.get_genre_display }}">
+        <input type="submit" value="{{ interest.get_genre_display }}" class="button">
+    </form>
+    {% endfor %}
   </div>
 </div>
-    
-{% endfor %}
 
-<form action="{% url 'search' %}" method="GET">
-  <input type="text" name="q">
-  <input type="submit" value="search">
-</form>
-
-
-
-<div style="position: center">
+<section>
   {% for anime in results %}
-  <div id="divImg" style="background-size: contain; background-repeat: no-repeat;">
-    <div class="card small">
-      <div class="card-image waves-effect waves-block waves-light">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
         <img src="{{ anime.images.jpg.image_url }}">
       </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{ anime.title }}
-        <p><a href="{% url 'detail' anime.mal_id %}">See More</a></p>
+      <div class="flip-card-back">
+        <div>
+          <h4>{{ anime.title }}</h4>
+          Genre(s): <br>
+          {% for genre in anime.genres %}
+          {{ genre.name }}
+          {% endfor %}
+          <p>Episodes: {{ anime.episodes }}</p>
+          <p>Status: {{ anime.status }}</p>
+          <br><br>
+            <a id="see-more" href="{% url 'detail' anime.mal_id %}">See More</a>
         </div>
-      <div class="card-reveal">
-        <p>{{ anime.synopsis }}</p>
       </div>
     </div>
   </div>
-</div>
-{% endfor %}
+  {% endfor %}
+</section>
 
 {% endblock %}
 

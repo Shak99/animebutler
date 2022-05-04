@@ -3,41 +3,225 @@
 :root {
     --deep-purple: #4A148C;
     --red-darken: #b71c1c;
-    --pink-darken: #FFBF46;
-    --pink-accent: #B3DEC1;
+    --pink-darken: #880E4F;
+    --pink-accent: #FF80AB;
     --cyan-lighten: #26c6da ;
     --teal-accent: #a7ffeb;
     --indigo-accent: #3d5afe;
     --purple-accent: #aa00ff;
     --amber-accent: #ffd740;
-    --yellow-accent: #ffff8d ;
+    --yellow-accent: #ffff8d;
     --lime-accent: #76ff03;
-  }
-
+}
 body {
     font-family: 'Tapestry', cursive;
-    /* font-family: "comic sans"; */
     background-image: url(../images/background-image.png);
+    /* background-repeat: no-repeat; */
     background-size: cover;
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 60px 1fr 80px;
+    grid-template-areas:
+        "nav"
+        "main"
+        "footer" 
+}
+/* navigation bar */
+body > nav {
+grid-area: nav;
+background-color: var(--deep-purple);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 20px 0 30px;
+}
+nav > a {
+margin: 20px;
+text-decoration: none;
+padding: 8px;
+border-radius: 5px;
+color: var(--yellow-accent);
+}
+nav > a:hover {
+color:var(--red-darken);
+background-color: var(--amber-accent);
+}
+nav > a.active {
+color: black;
+background-color: var(--cyan-lighten);
+}
+#logo {
+    margin-left: 0;
+}
+/* main section */
+body > main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #ffffff; */
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    }
+span {
+font-weight: 700;
+}
+a{
+    text-decoration: none;
+}
+.button, .delete-button{
+    color: black;
+    background-color: var(--cyan-lighten);
+    border: 1px solid var(--cyan-lighten);
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.delete-button {
+    background-color: var(--red-darken);
+    border: var(--red-darken);
+    color: white;
+}
+.button:hover, .delete-button:hover {
+    background-color: var(--pink-accent);
+    border: var(--pink-accent);
+    color: white;
+}
+.genre-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+.interests {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+.interests > form {
+    padding: 5px;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    gap: 10px;
+/* anime flip cards */
+/* The flip card container*/
+.flip-card {
+    background-color: transparent;
+    width: 225px;
+    height: 321px;
+    perspective: 1000px; 
+    border-radius: 5px;
+    padding: 15px;
+}
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 5px;
+    text-align: left;
+}
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    border-radius: 5px;
+}
+.flip-card-back {
+    transform: rotateY(180deg);
+    color: black;
+    background-color: white;
+}
+.flip-card-back > div {
+    padding: 10px;
+}
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    color: black;
+}
+#see-more {
+    color: var(--amber-accent);
+    font-weight: 700;
+    background-color: var(--indigo-accent);
+    border: 1px solid var(--indigo-accent);
+    padding: 5px;
+    border-radius: 5px;
+}
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* anime details page */
+.anime-detail {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+.anime-detail > div {
+    padding: 5px;
+}
+.description {
+    width: 85%;
+    margin: 10px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
     padding: 10px;
 }
 
-.container {
-    background-color: white;
-    grid-template-rows: 80px 200px;
-    width:200px;
-    height:180px;
-    margin-left: auto;
-    margin-right: auto;
-    background-size: 180px 200px;
+/*footer section*/
+footer {
+    grid-area: footer;
+    background-color: var(--deep-purple);
+    font-family: 'Courier New', Courier, monospace
 }
-
-.navli {
-    padding: 20px;
+.copyright {
+    font-size: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.copyright > p {
+    margin: 6px;
+}
+.copyright > a {
+    color: var(--yellow-accent);
+    text-decoration: none;
+}
+.copyright > a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 433px) {
+    body > nav {
+        padding: 0;
+    }
 }
