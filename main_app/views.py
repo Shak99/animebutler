@@ -101,7 +101,7 @@ def add_to_watchlist(request, anime_id):
     anime = response.json()
     anime = anime['data']
     # saves api info to a new instance of Anime model
-new_anime = Anime.objects.create(
+    new_anime = Anime.objects.create(
         title=anime['title'],
         producers =[producer['name'] for producer in anime['producers']],
         genres = [genre['name'] for genre in anime['genres']],
