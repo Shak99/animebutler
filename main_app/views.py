@@ -11,8 +11,14 @@ import requests
 
 # Create your views here.
 def index(request):
-    # should also show all animes in database
-    return render(request, 'index.html')
+    response = requests.get('https://api.jikan.moe/v4/genres/anime')
+
+    # convert json and take out data property
+    genres = response.json()
+    genres = genres['data']
+    # print(users) # confirmed data fetched and viewed in console
+
+    return render(request, 'index.html', {'genres': genres })
 
 def signup(request):
     error_message = ''
@@ -44,10 +50,9 @@ def interest_index(request):
 
 @login_required
 def animes_index(request):
-    animes = Anime.objects.all()
-
+    interests = Interest.objects.filter(user=request.user)
     return render(request, 'animes/anime.html', { 
-        'animes': animes,
+        'interests': interests,
         })
 
 def search_for_anime(request):
@@ -59,6 +64,12 @@ def search_for_anime(request):
     results = results['data']
 
     return render(request, 'animes/anime.html', {'results' : results})
+
+def search_by_genre(request, genre_id):
+
+        return render(request, 'index.html',)
+
+    
 
 def animes_detail(request, anime_id):
     response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
