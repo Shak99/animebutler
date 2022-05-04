@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
     
@@ -30,20 +31,14 @@ LANG_OPTIONS = (
 
 class Anime(models.Model):
     title = models.CharField(max_length=350)
-    producer = models.CharField(max_length=200)
-    genre = models.CharField(
-        max_length=20, #maybe use .length for size of list
-        choices=GENRES,
-        default=GENRES[0][0]
-        )
-    description = models.CharField(max_length=500)
-    creator = models.CharField(max_length=250)
+    producers = ArrayField(models.CharField(max_length=200), size=10, default=list)
+    genres = ArrayField(models.CharField(max_length=200), size=10, default=list)
+    description = models.CharField(max_length=1000)
+    year = models.IntegerField(default=None)
     episodes = models.IntegerField()
-    language = models.CharField(
-        max_length=20,
-        choices=LANG_OPTIONS,
-        default=LANG_OPTIONS[0][0]
-    )
+    status = models.CharField(max_length=100, default="Not Available")
+    image = models.CharField(max_length=200, default="No url")
+    mal_id=models.IntegerField(default=0)
     
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
