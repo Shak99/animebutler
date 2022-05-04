@@ -38,7 +38,6 @@ body {
     background-size: 180px 200px;
 }
 
-li {
-    padding: 30px;
-    
+.navli {
+    padding: 20px;
 }
