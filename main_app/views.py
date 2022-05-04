@@ -101,10 +101,16 @@ def add_to_watchlist(request, anime_id):
     anime = response.json()
     anime = anime['data']
     # saves api info to a new instance of Anime model
-    new_anime = Anime.objects.create(
+new_anime = Anime.objects.create(
         title=anime['title'],
+        producers =[producer['name'] for producer in anime['producers']],
+        genres = [genre['name'] for genre in anime['genres']],
         description = anime['synopsis'][:498],
+        year = anime['year'],
         episodes = anime['episodes'],
+        status = anime['status'],
+        image = anime['images']['jpg']['image_url'],
+        mal_id = anime['mal_id']
         # accept mal_id as a separate id for anime to reference api
     )
     # saves anime and user to watchlist
