@@ -34,7 +34,7 @@ class Anime(models.Model):
     producers = ArrayField(models.CharField(max_length=200), size=10, default=list)
     genres = ArrayField(models.CharField(max_length=200), size=10, default=list)
     description = models.CharField(max_length=1000)
-    year = models.IntegerField(default=None)
+    year = models.IntegerField(default=None, null=True)
     episodes = models.IntegerField()
     status = models.CharField(max_length=100, default="Not Available")
     image = models.CharField(max_length=200, default="No url")
