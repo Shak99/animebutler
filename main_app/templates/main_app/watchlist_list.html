@@ -10,25 +10,24 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="">
-                <p>NEED TO CHANGE MODEL FOR PHOTOS</p>
+                <img src="{{object.anime.image}}">
+                <p></p>
             </div>
             <div class="flip-card-back">
                 <div class="card-content">
                     <h4>{{ object.anime.title }}</h4>
                     Genre(s): <br>
                     {% for genre in object.anime.genres %}
-                    {{ genre.name }}
+                    {{ genre }}
                     {% endfor %}
                     <p>Episodes: {{ object.anime.episodes }}</p>
                     <p>Status: {{ object.anime.status }}</p>
-                    <br><br>
                     <div class="card-buttons">
                         <a id="see-more" href="{% url 'detail' object.anime.id %}">See More</a>
                         <form method="POST" action="{% url 'delete_anime' object.anime.id %}">
                             {% csrf_token %}
                             <br>
-                            <input id="see-more" type="submit" value="delete from list">
+                            <input id="see-more" type="submit" value="Delete from List">
                         </form>
                     </div>
                 </div>
