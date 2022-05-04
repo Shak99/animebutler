@@ -2,15 +2,30 @@
 
 {% block content %}
 
-<h1>hello this is your interests lists page</h1>
+<div class="greeting" style="display: flex; justify-content:flex-start; width:100%;"><h1 class="h1Greeting" style="width: 60vw;">hello this is your interests lists page</h1></div>
 <h3>{{ user.username }}</h3>
 
-{% for interest in interests %}
-    <p>{{ interest.get_genre_display }}</p>
-    <form method="POST" action="{% url 'delete_interest' interest.id %}">
-        {% csrf_token %}
-        <input class="delete-button" type="submit" value="delete">
-    </form>
-{% endfor %}
+
+<table style="margin-left: auto; margin-right: auto;">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for interest in interests %}
+        <tr>
+            <td><span style="font-family:'Helvetica'">{{ interest.get_genre_display }}</span></td>
+            <td>
+                <form method="POST" action="{% url 'delete_interest' interest.id %}">
+                {% csrf_token %}
+                <input class="delete-button" type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
