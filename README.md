@@ -42,17 +42,17 @@ Our [trello board](https://trello.com/b/9PvkCVq0/skip-group-project) holds both 
 ## Come check out [AnimeButler](http://animebutler.herokuapp.com)!
  
 ## Next Steps/Icebox:
-Make AnimeButler responsive on mobile devices
-Add trailer videos to the anime for users to preview
-Send users to a platform to watch the animes
-Add a user profile page
-Change card size dynamically with image size from API
-Allow users to have more than one list for animes
+- Make AnimeButler responsive on mobile devices
+- Add trailer videos to the anime for users to preview
+- Send users to a platform to watch the animes
+- Add a user profile page
+- Change card size dynamically with image size from API
+- Allow users to have more than one list for animes
  
 ## Technologies:
-Django
-HTML
-Python3
-PostgreSQL
-CSS
-API: Jikan API (4.0.0)
+- Django
+- HTML
+- Python3
+- PostgreSQL
+- CSS
+- API: Jikan API (4.0.0)
