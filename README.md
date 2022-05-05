@@ -12,7 +12,7 @@ AnimeButler uses the Jikan API to access multiple sources of anime. The users wi
 Our [trello board](https://trello.com/b/9PvkCVq0/skip-group-project) holds both our ERD and Wireframes for this project. It also details our completion process along with our icebox items that we would work on in the future.
  
 ## Website Views
-Initial Landing Page
+###### Initial Landing Page
 <img width="1279" alt="LandingPage" src="https://user-images.githubusercontent.com/47376680/167033338-7ecc4bd0-001e-464b-9e30-022009e7f173.png">
 
 ###### Sign In
