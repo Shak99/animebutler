@@ -10,40 +10,39 @@
     <input type="text" name="q">
     <button type="submit" class="button-85" role="button">Search</button>
   </form>
-  <div class="interests">
-    {% for interest in interests %}
-    <form action="{% url 'search' %}" method="GET">
-        <input type="hidden" name="q" value="{{ interest.get_genre_display }}">
-        <input type="submit" value="{{ interest.get_genre_display }}" class="button">
-    </form>
-    {% endfor %}
-  </div>
+</div>
+<div class="options">
+  <h3>Your interests:</h3>
+  {% for interest in interests %}
+      <a class="button" href="{% url 'interest-search' interest.genre %}">{{interest.get_genre_display}}</a>
+  {% endfor %}
+
 </div>
 
-<section>
-  {% for anime in results %}
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front">
-        <img src="{{ anime.images.jpg.image_url }}">
-      </div>
-      <div class="flip-card-back">
-        <div>
-          <h4>{{ anime.title }}</h4>
-          Genre(s): <br>
-          {% for genre in anime.genres %}
-          {{ genre.name }}
-          {% endfor %}
-          <p>Episodes: {{ anime.episodes }}</p>
-          <p>Status: {{ anime.status }}</p>
-          <br><br>
-            <a id="see-more" href="{% url 'detail' anime.mal_id %}">See More</a>
+{% for anime in results %}
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{{ anime.images.jpg.image_url }}">
+            </div>
+            <div class="flip-card-back">
+                <div>
+                  <h4>{{ anime.title }}</h4>
+                  Genre(s): <br>
+                  {% for genre in anime.genres %}
+                  {{ genre.name }}
+                  {% endfor %}
+                  <p>Episodes: {{ anime.episodes }}</p>
+                  <p>Status: {{ anime.status }}</p>
+                  <br>
+                  <div class="card-buttons">
+                    <a id="see-more" href="{% url 'detail' anime.mal_id %}">See More</a>
+                  </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</section>
+    </div> <br>
+{% endfor %}
 
 {% endblock %}
 

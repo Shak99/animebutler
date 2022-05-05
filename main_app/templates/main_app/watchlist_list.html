@@ -2,7 +2,9 @@
 
 {% block content %}
 
-<h1>Watchlist for {{user.username}}</h1>
+<div class="greeting">
+    <h1>Watchlist for {{user.username}}</h1>
+</div>
 
 {% if object_list %}
 <section>
@@ -23,7 +25,7 @@
                     <p>Episodes: {{ object.anime.episodes }}</p>
                     <p>Status: {{ object.anime.status }}</p>
                     <div class="card-buttons">
-                        <a id="see-more" href="{% url 'detail' object.anime.id %}">See More</a>
+                        <a id="see-more" href="{% url 'detail' object.anime.mal_id %}">See More</a>
                         <form method="POST" action="{% url 'delete_anime' object.anime.id %}">
                             {% csrf_token %}
                             <br>

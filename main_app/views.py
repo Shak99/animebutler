@@ -3,22 +3,34 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
-from .models import *
 
+from django.views.generic import ListView, CreateView, DeleteView
+from .models import *
 import requests
 
-# Create your views here.
 def index(request):
-    response = requests.get('https://api.jikan.moe/v4/genres/anime')
+    return render(request, 'index.html', {'genres': GENRES })
 
-    # convert json and take out data property
-    genres = response.json()
-    genres = genres['data']
-    # print(users) # confirmed data fetched and viewed in console
+def index_search(request):
+    query = request.GET.get('q')
+    response = requests.get(f'https://api.jikan.moe/v4/anime?q={query}&order_by"popularity"')
+    results = response.json()
+    results = results['data']
+    context = {
+        'results': results,
+        'genres': GENRES
+    }
+    return render(request, 'index.html', context)
 
-    return render(request, 'index.html', {'genres': genres })
+def search_by_genre(request, genre_id):
+    response = requests.get(f'https://api.jikan.moe/v4/anime?genres={genre_id}&order_by="popularity"')
+    genre_results = response.json()
+    genre_results = genre_results['data']
+    context = {
+        'genres': GENRES,
+        'results': genre_results
+    }
+    return render(request, 'index.html', context)
 
 def signup(request):
     error_message = ''
@@ -39,62 +51,53 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-@login_required
-def interest_index(request):
-# limit interest to show over if it matches user id
-    interests = Interest.objects.filter(user=request.user)
-    context = {
-        'interests': interests
-    }
-    return render(request, 'interests/index.html', context)
-
+# animes/
 @login_required
 def animes_index(request):
     interests = Interest.objects.filter(user=request.user)
-    return render(request, 'animes/anime.html', { 
+    #print(interests)
+    context = {
         'interests': interests,
-        })
+    }
+    return render(request, 'animes/anime.html', context)
 
 def search_for_anime(request):
-    print('is search for anime function running?')
     query = request.GET.get('q')
-    # print(request.GET.get('q'))
-    response = requests.get(f"https://api.jikan.moe/v4/anime?q={query}")
+    response = requests.get(f'https://api.jikan.moe/v4/anime?q={query}&order_by"popularity"')
     results = response.json()
     results = results['data']
+    interests = Interest.objects.filter(user=request.user)
+    context = {
+        'results': results,
+        'interests': interests,
+        'genres': GENRES
+    }
+    return render(request, 'animes/anime.html', context)
 
-    return render(request, 'animes/anime.html', {'results' : results})
-
-def search_by_genre(request, genre_id):
-
-        return render(request, 'index.html',)
-
-    
+@login_required
+def search_by_interest(request, interest_id):
+    response = requests.get(f'https://api.jikan.moe/v4/anime?genres={interest_id}&order_by="popularity"')
+    interest_results = response.json()
+    interest_results = interest_results['data']
+    interests = Interest.objects.filter(user=request.user)
+    context = {
+        'results': interest_results,
+        'interests': interests,
+        'genres': GENRES
+    }
+    return render(request, 'animes/anime.html', context)
 
 def animes_detail(request, anime_id):
     response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
     anime = response.json()
     anime = anime['data']
-    # anime = Anime.objects.get(id=anime_id)
-    # at some point add functionality to add anime to watchlist
-    # watchlist_form = watchlistForm()
-    return render(request, 'animes/detail.html', {
-        'anime': anime, 
-    })
-    
-# def genre_view(request, genre_id):
-#     id_for_genre = None
-#     for genre in GENRES:
-#         if genre_id == genre[1]:
-#             id_for_genre = genre[0]
-#     anime_genre = Anime.objects.filter (genre = id_for_genre)
-#     context = {
-#         'genres': anime_genre,
-#         'GENRES': GENRES
-#     }
-#     return render(request, 'animes/genre.html', context)
-    
+    return render(request, 'animes/detail.html', {'anime': anime})
 
+# watchlist/
+class WatchlistDetail(LoginRequiredMixin, ListView):
+    model = Watchlist
+
+@login_required
 def add_to_watchlist(request, anime_id):
     # api request consumption for one anime
     response = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}")
@@ -120,31 +123,18 @@ def add_to_watchlist(request, anime_id):
                 )
     return redirect('/watchlist/')
 
+@login_required
 def delete_from_watchlist(request, anime_id):
     addedanime = Watchlist.objects.get(anime=anime_id)
     addedanime.delete()
     return redirect('/watchlist/')
 
-# class addToWatchlist(CreateView):
-#     model = Watchlist
-#     fields = ['anime']
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
-#     success_url = '/watchlist/'
-
-class AnimeCreate(LoginRequiredMixin, CreateView):
-    model = Anime
-    fields = '__all__'
-    success_url = '/animes/'
-
+# interests/
 class InterestCreate(LoginRequiredMixin, CreateView):
     model = Interest
     fields = ['genre']
 
-# tie in the user_id request.user
+    # tie in the user_id request.user
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -155,13 +145,11 @@ class InterestDelete(LoginRequiredMixin, DeleteView):
     model = Interest
     success_url = '/interests/'
 
-class WatchlistDetail(LoginRequiredMixin, ListView):
-    model = Watchlist
-
-class WatchlistUpdate(LoginRequiredMixin, UpdateView):
-    model = Watchlist
-    fields = ['anime', 'interest']
-
-class WatchlistDelete(LoginRequiredMixin, DeleteView):
-    model = Watchlist
-    success_url = '/watchlist/'
+@login_required
+def interest_index(request):
+    # limit interest to show only if it matches user id
+    interests = Interest.objects.filter(user=request.user)
+    context = {
+        'interests': interests
+    }
+    return render(request, 'interests/index.html', context)

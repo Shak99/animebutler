@@ -5,8 +5,8 @@
 <div class="greeting" style="display: flex; justify-content:flex-start; width:100%;"><h1 class="h1Greeting" style="width: 60vw;">hello this is your interests lists page</h1></div>
 <h3>{{ user.username }}</h3>
 
-
-<table style="margin-left: auto; margin-right: auto;">
+{% if interests %}
+<table class="interests-table">
     <thead>
       <tr>
         <th></th>
@@ -16,7 +16,7 @@
     <tbody>
         {% for interest in interests %}
         <tr>
-            <td><span style="font-family:'Helvetica'">{{ interest.get_genre_display }}</span></td>
+            <td><span>{{ interest.get_genre_display }}</span></td>
             <td>
                 <form method="POST" action="{% url 'delete_interest' interest.id %}">
                 {% csrf_token %}
@@ -27,5 +27,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+{% else %}
+<h3>Add some interests!</h3>
+{% endif %}
 {% endblock %}

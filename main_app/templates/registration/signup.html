@@ -5,13 +5,13 @@
 
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
-<div class="greeting">
-<form action="{% url 'signup' %}" method="post">
-	{% csrf_token %}	
-	{{ form.as_table }}
-	<input type="submit" class="btn" value="signup">
-		
-</form>
+<div class="form-signup">
+	<form action="{% url 'signup' %}" method="post">
+		{% csrf_token %}	
+		{{ form.as_table }}
+		<br><br>
+		<input type="submit" class="button" value="signup">
+	</form>
 </div>
 
 {% endblock content %}
