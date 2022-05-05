@@ -96,6 +96,9 @@ def animes_detail(request, anime_id):
 # watchlist/
 class WatchlistDetail(LoginRequiredMixin, ListView):
     model = Watchlist
+    def get_queryset(self):
+        return Watchlist.objects.filter(user=self.request.user)
+    
 
 @login_required
 def add_to_watchlist(request, anime_id):
