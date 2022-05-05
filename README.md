@@ -1,5 +1,5 @@
 # AnimeButler
-Inspirations: Israel Flores! He has never watched an anime in his life, and that feels like a crime 😔 
+Inspiration: Israel Flores! He has never watched an anime in his life, and that feels like a crime 😔 
  
 We made a Django based website to assist those who don’t know where to start when starting their anime journey, and to help continue others on the mind blowing path of this animation.
  
