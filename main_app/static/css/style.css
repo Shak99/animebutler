@@ -30,34 +30,32 @@ body {
 }
 /* navigation bar */
 body > nav {
-position: fixed;
-width: 99vw;
-z-index: 10;
-grid-area: nav;
-background-color: var(--deep-purple);
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0 20px 0 30px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    grid-area: nav;
+    background-color: var(--deep-purple);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 0px;
 }
 nav > a {
-margin: 20px;
-text-decoration: none;
-padding: 8px;
-border-radius: 5px;
-color: var(--yellow-accent);
+    margin: 20px;
+    text-decoration: none;
+    padding: 4px;
+    border-radius: 5px;
+    color: var(--yellow-accent);
 }
 nav > a:hover {
-color:var(--red-darken);
-background-color: var(--amber-accent);
+    color:var(--red-darken);
+    background-color: var(--amber-accent);
 }
 nav > a.active {
-color: black;
-background-color: var(--cyan-lighten);
+    color: black;
+    background-color: var(--cyan-lighten);
 }
-#logo {
-    margin-left: 0;
-}
+
 /* main section */
 body > main {
     /* background-image: url(../images/cherry.jpg);
@@ -71,22 +69,30 @@ body > main {
     padding: 20px;
     font-family: 'Courier New', Courier, monospace;
     color: white;
-    }
+}
+.greeting{
+    display: flex; 
+    justify-content:flex-start; 
+    width:100%;
+    margin-top: 10px;
+}
+.h1Greeting{
+    width: 60vw;
+}
 span {
-font-weight: 700;
+    font-weight: 700;
 }
 a{
     text-decoration: none;
 }
 .button, .delete-button{
-    color: black;
-    background-color: var(--cyan-lighten);
-    border: 1px solid var(--cyan-lighten);
+    color: white;
+    background-color: var(--pink-accent);
+    border: 1px solid var(--pink-accent);
     border-radius: 5px;
-    padding: 8px 15px;
+    padding: 4px 15px;
     font-size: 16px;
     font-weight: 700;
-    margin-top: 10px;
     text-align: center;
     cursor: pointer;
 }
@@ -96,35 +102,121 @@ a{
     color: white;
 }
 .button:hover, .delete-button:hover {
-    background-color: var(--pink-accent);
-    border: var(--pink-accent);
+    background-color: var(--amber-accent);
+    border: var(--amber-accent);
     color: white;
 }
-.genre-options {
+.button-85 {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.button-85:before {
+    content: "";
+    background: linear-gradient(
+    45deg,
+    #FF0000,
+    #FF7300,
+    #FFFB00,
+    #48FF00,
+    #00FFD5,
+    #002BFF,
+    #7A00FF,
+    #FF00C8,
+    #FF0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+@keyframes glowing-button-85 {
+    0% {
+    background-position: 0 0;
+    }
+    50% {
+    background-position: 400% 0;
+    }
+    100% {
+    background-position: 0 0;
+    }
+}
+.button-85:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+.options {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 100%;
+    width: 65vw;
     height: auto;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.options > a {
+    margin: 5px;
 }
 .interests {
     display: flex;
-    width: 100%;
-    height: 50px;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    width: 65vw;
+    height: auto;
 }
 .interests > form {
     padding: 5px;
 }
-
+.interests-table {
+    font-family: Helvetica, sans-serif;
+}
+.interests-table > tbody > tr > td {
+    padding: 5px 5px 0px 5px;
+}
+.form-interest{
+    font-weight: 600;
+    color: black;
+}
+.form-signup{
+    display: flex; 
+    justify-content: flex-start; 
+    width: 50%;
+    margin-top: 10px;
+}
+.form-signup > form {
+    margin: 10px;
+}
 /* anime flip cards */
 /* The flip card container*/
 .flip-card {
     background-color: transparent;
     width: 225px;
-    height: 321px;
+    height: 325px;
     perspective: 1000px; 
     border-radius: 5px;
     padding: 15px;
@@ -134,7 +226,6 @@ a{
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
     border-radius: 5px;
@@ -153,10 +244,15 @@ a{
     backface-visibility: hidden;
     border-radius: 5px;
 }
+.flip-card-front > img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
 .flip-card-back {
+    background-color: white;
     transform: rotateY(180deg);
     color: black;
-    background-color: white;
 }
 .flip-card-back > div {
     padding: 10px;
@@ -232,82 +328,4 @@ footer {
     body > nav {
         padding: 0;
     }
-}
-.button-85 {
-    padding: 0.6em 2em;
-    border: none;
-    outline: none;
-    color: rgb(255, 255, 255);
-    background: #111;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  .button-85:before {
-    content: "";
-    background: linear-gradient(
-      45deg,
-      #FF0000,
-      #FF7300,
-      #FFFB00,
-      #48FF00,
-      #00FFD5,
-      #002BFF,
-      #7A00FF,
-      #FF00C8,
-      #FF0000
-    );
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing-button-85 20s linear infinite;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 10px;
-  }
-  @keyframes glowing-button-85 {
-    0% {
-      background-position: 0 0;
-    }
-    50% {
-      background-position: 400% 0;
-    }
-    100% {
-      background-position: 0 0;
-    }
-  }
-  .button-85:after {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #222;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-  }
-  
-  .form-interest{
-      font-weight: 600;
-      color: black;
-  }
-
-.greeting{
-    display: flex; 
-    justify-content:flex-start; 
-    width:100%;
-}
-
-.h1Greeting{
-    width: 60vw;
 }

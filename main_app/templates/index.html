@@ -10,12 +10,12 @@
     <button type="submit" class="button-85" role="button">Search</button>
 </form>
 
-{% comment %} <!--search by genres-->
-<div class="genre-options">
-{% for genre in genres %}
-    <a class="button" href="{% url 'animes-genre' genre.mal_id %}">{{genre.name}}</a>
-{% endfor %}
-</div> {% endcomment %}
+<!--search by genres-->
+<div class="options">
+    {% for genre in genres %}
+        <a class="button" href="{% url 'genre-search' genre.0 %}">{{genre.1}}</a>
+    {% endfor %}
+</div>
 
 {% for anime in results %}
     <div class="flip-card">
@@ -24,15 +24,19 @@
                 <img src="{{ anime.images.jpg.image_url }}">
             </div>
             <div class="flip-card-back">
-                <h4>{{ anime.title }}</h4>
-                Genre(s): <br>
-                {% for genre in anime.genres %}
-                {{ genre.name }}
-                {% endfor %}
-                <p>Episodes: {{ anime.episodes }}</p>
-                <p>Status: {{ anime.status }}</p>
-                <br><br><br>
-                <a href="{% url 'detail' anime.mal_id %}">See More</a>
+                <div>
+                    <h4>{{ anime.title }}</h4>
+                    Genre(s): <br>
+                    {% for genre in anime.genres %}
+                    {{ genre.name }}
+                    {% endfor %}
+                    <p>Episodes: {{ anime.episodes }}</p>
+                    <p>Status: {{ anime.status }}</p>
+                    <br>
+                    <div class="card-buttons">
+                        <a id="see-more" href="{% url 'detail' anime.mal_id %}">See More</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div> <br>
