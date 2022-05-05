@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="greeting"><h1 class="h1Greeting">Welcome back, {{ user.username}}</h1></div>
+<div class="greeting"><h1 class="h1Greeting">Welcome back, {{ user.username }}</h1></div>
 
-<h3 style="padding-right: 70px">Search for anime or click on an interest</h3>
+<h3 id="search-interest">Search for anime or click on an interest</h3>
 <div class="search">
   <form action="{% url 'search' %}" method="GET">
     <input type="text" name="q">
