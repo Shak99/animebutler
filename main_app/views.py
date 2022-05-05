@@ -18,7 +18,7 @@ def index_search(request):
     results = results['data']
     context = {
         'results': results,
-        'genres': GENRES
+        'genres': GENRES,
     }
     return render(request, 'index.html', context)
 
@@ -28,7 +28,7 @@ def search_by_genre(request, genre_id):
     genre_results = genre_results['data']
     context = {
         'genres': GENRES,
-        'results': genre_results
+        'results': genre_results,
     }
     return render(request, 'index.html', context)
 
@@ -55,7 +55,6 @@ def signup(request):
 @login_required
 def animes_index(request):
     interests = Interest.objects.filter(user=request.user)
-    #print(interests)
     context = {
         'interests': interests,
     }
@@ -70,7 +69,7 @@ def search_for_anime(request):
     context = {
         'results': results,
         'interests': interests,
-        'genres': GENRES
+        'genres': GENRES,
     }
     return render(request, 'animes/anime.html', context)
 
@@ -83,7 +82,7 @@ def search_by_interest(request, interest_id):
     context = {
         'results': interest_results,
         'interests': interests,
-        'genres': GENRES
+        'genres': GENRES,
     }
     return render(request, 'animes/anime.html', context)
 
@@ -96,6 +95,7 @@ def animes_detail(request, anime_id):
 # watchlist/
 class WatchlistDetail(LoginRequiredMixin, ListView):
     model = Watchlist
+
     def get_queryset(self):
         return Watchlist.objects.filter(user=self.request.user)
     
@@ -122,7 +122,7 @@ def add_to_watchlist(request, anime_id):
     # saves anime and user to watchlist
     Watchlist.objects.create (
                     user=request.user,
-                    anime=new_anime
+                    anime=new_anime,
                 )
     return redirect('/watchlist/')
 
@@ -153,6 +153,6 @@ def interest_index(request):
     # limit interest to show only if it matches user id
     interests = Interest.objects.filter(user=request.user)
     context = {
-        'interests': interests
+        'interests': interests,
     }
     return render(request, 'interests/index.html', context)

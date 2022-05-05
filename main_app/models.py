@@ -20,16 +20,6 @@ GENRES = [
     ('36', 'Slice of Life'),
 ]
 
-LANG_OPTIONS = (
-    ('a', 'Japanese Original'),
-    ('b', 'English Dub'),
-    ('c', 'Portuguese Dub'),
-    ('d', 'Spanish Dub'),
-    ('e', 'Original Japanese/English Sub'),
-    ('f', 'Original Japanese/Portuguese Sub'),
-    ('g', 'Original Japanese/Spanish Sub'),
-)
-
 class Anime(models.Model):
     title = models.CharField(max_length=350)
     producers = ArrayField(models.CharField(max_length=200), size=10, default=list)
