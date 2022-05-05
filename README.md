@@ -4,7 +4,9 @@ Inspiration: Israel Flores! He has never watched an anime in his life, and that 
 We made a Django based website to assist those who don’t know where to start when starting their anime journey, and to help continue others on the mind blowing path of this animation.
  
 AnimeButler uses the Jikan API to access multiple sources of anime. The users will be able to create an account, add interested genres to their profile, and add animes to their watchlist. They will have the option to search animes by title using the search bar, and by genres using the genre buttons.
- 
+
+###### Pitch Presentation: https://docs.google.com/presentation/d/12blW-RlstM4J5ODzwPZW-vM08s4T57qbbSmr4S9I0Cg/edit
+
 ## ERD
  <img width="727" alt="ERD" src="https://user-images.githubusercontent.com/47376680/167033188-d37e99a7-29ae-4d3d-8e6c-d259f70ebab6.png">
 
